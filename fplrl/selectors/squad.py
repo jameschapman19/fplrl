@@ -2,7 +2,7 @@ import cvxpy as cp
 import numpy as np
 
 
-def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.ndarray, cost: np.ndarray,
+def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.ndarray, purchase_value: np.ndarray,
                  squad_value=100000, optimise='points'):
     """
     Selects the best possible XI given one
@@ -16,9 +16,9 @@ def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.nda
     """
 
     # Define optimisation variables
-    selections = cp.Variable(club.shape[0])
-    subs = cp.Variable(club.shape[0])
-    captain = cp.Variable(club.shape[0])
+    selections = cp.Variable(club.shape[0], integer=True)
+    subs = cp.Variable(club.shape[0], integer=True)
+    captain = cp.Variable(club.shape[0], integer=True)
     # Objective:maximise points
     if optimise == 'points':
         objective = cp.Maximize(selections @ expected_points + 2 * captain @ expected_points)
@@ -50,7 +50,7 @@ def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.nda
         # 15 in the squad
         cp.sum(captain + selections + subs) >= 15,
         # don't exceed budget
-        (captain + selections + subs) @ cost <= squad_value,
+        (captain + selections + subs) @ purchase_value <= squad_value,
         # no 'negative' selections
         selections >= 0,
         subs >= 0,

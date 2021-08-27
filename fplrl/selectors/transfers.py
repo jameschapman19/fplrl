@@ -2,22 +2,23 @@ import numpy as np
 import cvxpy as cp
 
 
-def transfer_selector(current_squad: np.ndarray, club: np.ndarray, position: np.ndarray, expected_points: np.ndarray,
-                      cost: np.ndarray,
-                      squad_value: np.ndarray, transfers_available=2):
+def select_transfers(current_squad: np.ndarray, club: np.ndarray, position: np.ndarray, expected_points: np.ndarray,
+                     purchase_value: float, sale_value: float, bank: float,
+                     transfers_available=2):
     # Define optimisation variables
-    selections = cp.Variable(club.shape[0])
-    subs = cp.Variable(club.shape[0])
-    captain = cp.Variable(club.shape[0])
-    transfers_in = cp.Variable(club.shape[0])
-    transfers_out = cp.Variable(club.shape[0])
+    selections = cp.Variable(club.shape[0], integer=True)
+    subs = cp.Variable(club.shape[0], integer=True)
+    captain = cp.Variable(club.shape[0], integer=True)
+    transfers_in = cp.Variable(club.shape[0], integer=True)
+    transfers_out = cp.Variable(club.shape[0], integer=True)
     # Objective:maximise points
     objective = cp.Maximize(selections @ expected_points + 2 * captain @ expected_points)
     # Constraints
     constraints = [
-        (current_squad + transfers_in - transfers_out) >= (captain + selections + subs),
-        transfers_in <= transfers_available,
-        transfers_out <= transfers_available,
+        (current_squad + transfers_in) - (captain + selections + subs) >= 0,
+        (current_squad + transfers_out) - (captain + selections + subs) >= 0,
+        cp.sum((current_squad + transfers_in) - (captain + selections + subs)) <= transfers_available,
+        cp.sum((current_squad + transfers_out) - (captain + selections + subs)) <= transfers_available,
         # Captain, Selections and Subs need to be unique
         (captain + selections + subs) <= 1,
         # no more than 3 from each club
@@ -39,14 +40,17 @@ def transfer_selector(current_squad: np.ndarray, club: np.ndarray, position: np.
         # 15 in the squad
         cp.sum(captain + selections + subs) >= 15,
         # don't exceed budget
-        (captain + selections + subs) @ cost <= squad_value,
-        # no 'negative' selections
+        # (captain + selections + subs) @ cost <= squad_value,
+        current_squad @ purchase_value + transfers_in @ purchase_value - transfers_out @ sale_value <= current_squad @ sale_value + bank,
+        # nonneg
         selections >= 0,
         subs >= 0,
         captain >= 0,
+        transfers_in >= 0,
+        transfers_out >= 0,
     ]
     problem = cp.Problem(objective, constraints)
     problem.solve()
     team_expected_points = selections.value @ expected_points + 2 * captain.value @ expected_points
     return np.round(selections.value), np.round(subs.value), np.round(
-        captain.value), transfers_in, transfers_out, team_expected_points
+        captain.value), transfers_in.value, transfers_out.value, team_expected_points
