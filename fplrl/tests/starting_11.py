@@ -14,7 +14,7 @@ OH_position = OneHotEncoder(sparse=False).fit_transform(position)
 expected_points = np.random.normal(4, 2, size=(n_clubs * n_players_per_club, 1))
 cost = np.random.uniform(4.0, 13.0, size=(n_clubs * n_players_per_club, 1))
 value = 100
-current_squad = np.sum(select_squad(OH_club, OH_position, expected_points, cost, value),axis=0)
+current_squad = np.sum(select_squad(OH_club, OH_position, expected_points, cost, value), axis=0)
 selections, subs, captain = select_starting_11(current_squad, OH_club, OH_position, expected_points, cost)
 
 print()

@@ -1,5 +1,5 @@
-import numpy as np
 import cvxpy as cp
+import numpy as np
 
 
 def select_transfers(current_squad: np.ndarray, club: np.ndarray, position: np.ndarray, expected_points: np.ndarray,
