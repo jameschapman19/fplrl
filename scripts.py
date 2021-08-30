@@ -1,11 +1,13 @@
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 
-from fplrl.selectors.squad import select_squad
-from fplrl.selectors.transfers import select_transfers
+from fplrl.tools.squad import select_squad
+from fplrl.tools.transfers import select_transfers
 
 n_clubs = 20
 n_players_per_club = 21
+
+current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/2021-22/gws/merged_gw.csv')
 
 club = np.random.randint(0, n_clubs, size=(n_clubs * n_players_per_club, 1))
 OH_club = OneHotEncoder(sparse=False).fit_transform(club)

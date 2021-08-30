@@ -13,11 +13,7 @@ FEATURES = ['position', 'assists',
 
 def get_data_at_time(season=16, gw=2):
     seasons = [f'20{s}-{s + 1}' for s in range(16, season + 1)]
-    previous_seasons = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/cleaned_merged_seasons.csv',
-                                   encoding='cp1252').iloc[:, 1:]
-    current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/2021-22/gws/merged_gw.csv')
-    current_season['season_x'] = '2021-22'
-    all_data = pd.concat([previous_seasons, current_season])
+    all_data = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/cleaned_merged_seasons.csv').iloc[:, 1:]
     old_data = all_data[all_data.season_x.isin(seasons[:-1])]
     current_data = all_data[all_data.season_x == seasons[-1]]
     current_data = current_data[current_data.GW < gw]
@@ -25,11 +21,9 @@ def get_data_at_time(season=16, gw=2):
 
 
 def get_data_next_gw(season=16, gw=2):
-    previous_seasons = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/cleaned_merged_seasons.csv',
-                                   encoding='cp1252').iloc[:, 1:]
+    all_data = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/cleaned_merged_seasons.csv')
     current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data/2021-22/gws/merged_gw.csv')
     current_season['season_x'] = '2021-22'
-    all_data = pd.concat([previous_seasons, current_season])
     next_gw_data = all_data[all_data.season_x == f'20{season}-{season + 1}']
     next_gw_data = next_gw_data[next_gw_data.GW == gw]
     return next_gw_data[PREDICTIONS]
@@ -38,6 +32,7 @@ def get_data_next_gw(season=16, gw=2):
 def main():
     features = get_data_at_time(21, 3)
     pred_features = get_data_next_gw(21, 3)
+    print(pred_features)
     print()
 
 
