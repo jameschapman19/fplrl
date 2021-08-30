@@ -1,5 +1,3 @@
-import csv
-
 from fplrl.data.cleaners import *
 from fplrl.data.collector import collect_gw, merge_gw
 from fplrl.data.getters import *
