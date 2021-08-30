@@ -69,7 +69,6 @@ def export_cleaned_data(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data/'
         filename(str): Name of the file
     """
 
-    path = os.getcwd()
     filename = 'cleaned_merged_seasons.csv'
     filepath = join(datadir, filename)
     df.to_csv(filepath, encoding='utf-8')

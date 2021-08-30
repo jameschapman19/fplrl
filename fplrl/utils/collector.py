@@ -65,7 +65,8 @@ def merge_gw(gw, gw_directory):
         writer.writerow(row)
 
 
-def collect_gw(gw, directory_name, output_dir, root_directory_name="data/2021-22"):
+def collect_gw(gw, directory_name='', output_dir="C:/Users/chapm/PycharmProjects/fplrl/data/2021-22/gws/",
+               root_directory_name="C:/Users/chapm/PycharmProjects/fplrl/data/2021-22"):
     rows = []
     fieldnames = []
     fixtures_home, fixtures_away = get_fixtures(root_directory_name)
@@ -105,8 +106,8 @@ def collect_gw(gw, directory_name, output_dir, root_directory_name="data/2021-22
         writer.writerow(row)
 
 
-def collect_all_gws(directory_name, output_dir):
-    for i in range(1, 5):
+def collect_all_gws(num_gws, directory_name, output_dir):
+    for i in range(1, num_gws):
         collect_gw(i, directory_name, output_dir)
 
 
