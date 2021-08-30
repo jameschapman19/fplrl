@@ -4,7 +4,7 @@ from os.path import join
 import pandas as pd
 
 
-def import_merged_gw(data_dir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/', season='2020-21'):
+def import_merged_gw(data_dir='C:/Users/chapm/PycharmProjects/fplrl/data/', season='2020-21'):
     """ Function to call merged_gw.csv file in every data_utils/season folder
     Args:
         season (str): Name of the folder season that contains the merged_gw.csv file
@@ -41,7 +41,7 @@ def filter_players_exist_latest(df, col='position'):
     return df
 
 
-def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/'):
+def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data/'):
     """ Find team name from master_team_list file and match with the merged df
     """
 
@@ -62,7 +62,7 @@ def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/dat
     return df
 
 
-def export_cleaned_data(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/'):
+def export_cleaned_data(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data/'):
     """ Function to export merged df into specified folder
     Args:
         path (str): Path of the folder

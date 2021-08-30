@@ -1,4 +1,4 @@
-from mergers import *
+from .mergers import *
 
 
 def merge_data():
@@ -33,11 +33,3 @@ def merge_data():
              'GW']]
 
     export_cleaned_data(df)
-
-
-def main():
-    merge_data()
-
-
-if __name__ == "__main__":
-    main()
