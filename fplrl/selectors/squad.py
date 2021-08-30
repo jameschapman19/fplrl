@@ -10,7 +10,7 @@ def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.nda
     :param club: one-hot encoded club
     :param position: one-hot encoded club
     :param expected_points: expected points
-    :param cost: player cost
+    :param purchase_value: player cost
     :param squad_value: squad value
     :return: selections, subs, captain
     """
@@ -24,7 +24,7 @@ def select_squad(club: np.ndarray, position: np.ndarray, expected_points: np.nda
         objective = cp.Maximize(selections @ expected_points + 2 * captain @ expected_points)
     # Objective:maximise points
     elif optimise == 'random':
-        objective = cp.Maximize(selections @ expected_points + 2 * captain @ expected_points)
+        objective = cp.Maximize(0)
     else:
         raise ValueError('Choose points or random')
     # Constraints
