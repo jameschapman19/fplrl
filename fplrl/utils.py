@@ -1,4 +1,5 @@
 import pandas as pd
+from fplrl.data_utils.collector import merge_all_gws
 
 CURRENT_SEASON = 21
 PREDICTIONS = ['total_points', 'bps']
@@ -30,6 +31,8 @@ def get_data_next_gw(season=16, gw=2):
 
 
 def main():
+    merge_all_gws(3,'C:/Users/chapm/PycharmProjects/fplrl/data/2021-22/gws')
+
     features = get_data_at_time(21, 3)
     pred_features = get_data_next_gw(21, 3)
     print(pred_features)

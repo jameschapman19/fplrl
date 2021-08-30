@@ -2,7 +2,7 @@ from mergers import *
 
 
 def merge_data():
-    """ Merge all the data and export to a new file
+    """ Merge all the data_utils and export to a new file
     """
     season_latin = ['2016-17', '2017-18', '2018-19', '2019-20', '2020-21', '2021-22']
     encoding_latin = ['latin-1', 'latin-1', 'latin-1', 'utf-8', 'utf-8', 'utf-8']

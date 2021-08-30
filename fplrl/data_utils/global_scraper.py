@@ -1,18 +1,18 @@
-from fplrl.data.cleaners import *
-from fplrl.data.collector import collect_gw, merge_gw
-from fplrl.data.getters import *
-from fplrl.data.parsers import *
-from fplrl.data.understat import parse_epl_data
+from fplrl.data_utils.cleaners import *
+from fplrl.data_utils.collector import collect_gw, merge_gw
+from fplrl.data_utils.getters import *
+from fplrl.data_utils.parsers import *
+from fplrl.data_utils.understat import parse_epl_data
 
 
 def parse_data():
-    """ Parse and store all the data
+    """ Parse and store all the data_utils
     """
     season = '2021-22'
-    base_filename = 'C:/Users/chapm/PycharmProjects/fplrl/data/' + season + '/'
-    print("Getting data")
+    base_filename = 'C:/Users/chapm/PycharmProjects/fplrl/data_utils/' + season + '/'
+    print("Getting data_utils")
     data = get_data()
-    print("Parsing summary data")
+    print("Parsing summary data_utils")
     parse_players(data["elements"], base_filename)
     xPoints = []
     for e in data["elements"]:
@@ -25,11 +25,11 @@ def parse_data():
     for event in events:
         if event["is_current"] == True:
             gw_num = event["id"]
-    print("Cleaning summary data")
+    print("Cleaning summary data_utils")
     clean_players(base_filename + 'players_raw.csv', base_filename)
-    print("Getting fixtures data")
+    print("Getting fixtures data_utils")
     fixtures(base_filename)
-    print("Getting teams data")
+    print("Getting teams data_utils")
     parse_team_data(data["teams"], base_filename)
     print("Extracting player ids")
     id_players(base_filename + 'players_raw.csv', base_filename)
@@ -37,7 +37,7 @@ def parse_data():
     num_players = len(data["elements"])
     player_base_filename = base_filename + 'players/'
     gw_base_filename = base_filename + 'gws/'
-    print("Extracting player specific data")
+    print("Extracting player specific data_utils")
     for i, name in player_ids.items():
         player_data = get_individual_player_data(i)
         parse_player_history(player_data["history_past"], player_base_filename, name, i)

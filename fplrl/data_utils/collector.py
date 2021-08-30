@@ -1,6 +1,5 @@
 import csv
 import os
-import sys
 
 
 def get_teams(directory):
@@ -114,13 +113,3 @@ def collect_all_gws(directory_name, output_dir):
 def merge_all_gws(num_gws, gw_directory):
     for i in range(1, num_gws):
         merge_gw(i, gw_directory)
-
-
-def main():
-    # collect_all_gws(sys.argv[1], sys.argv[2])
-    merge_all_gws(int(sys.argv[1]), sys.argv[2])
-    # collect_gw(35, sys.argv[1], sys.argv[2])
-
-
-if __name__ == '__main__':
-    main()

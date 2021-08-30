@@ -4,8 +4,8 @@ from os.path import join
 import pandas as pd
 
 
-def import_merged_gw(data_dir='C:/Users/chapm/PycharmProjects/fplrl/data/', season='2020-21'):
-    """ Function to call merged_gw.csv file in every data/season folder
+def import_merged_gw(data_dir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/', season='2020-21'):
+    """ Function to call merged_gw.csv file in every data_utils/season folder
     Args:
         season (str): Name of the folder season that contains the merged_gw.csv file
     """
@@ -32,7 +32,7 @@ def clean_players_name_string(df, col='name'):
 
 
 def filter_players_exist_latest(df, col='position'):
-    """ Fill in null 'position' (data that only available in 20-21 season) into previous seasons.
+    """ Fill in null 'position' (data_utils that only available in 20-21 season) into previous seasons.
         Null meaning that player doesnt exist in latest season hence can exclude.
     """
 
@@ -41,7 +41,7 @@ def filter_players_exist_latest(df, col='position'):
     return df
 
 
-def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data/'):
+def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/'):
     """ Find team name from master_team_list file and match with the merged df
     """
 
@@ -62,7 +62,7 @@ def get_opponent_team_name(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/dat
     return df
 
 
-def export_cleaned_data(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data/'):
+def export_cleaned_data(df, datadir='C:/Users/chapm/PycharmProjects/fplrl/data_utils/'):
     """ Function to export merged df into specified folder
     Args:
         path (str): Path of the folder

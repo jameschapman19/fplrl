@@ -85,7 +85,7 @@ def parse_epl_data(outfile_base):
 
 
 def main():
-    parse_epl_data('data/2021-22/understat')
+    parse_epl_data('data_utils/2021-22/understat')
     # md, sd, gd = get_player_data(318)
     # match_frame = pd.DataFrame.from_records(md)
     # match_frame.to_csv('auba.csv', index=False)
