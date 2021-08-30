@@ -3,9 +3,9 @@ import os
 
 
 def clean_players(filename, base_filename):
-    """ Creates a file with only important data_utils columns for each player
+    """ Creates a file with only important utils columns for each player
     Args:
-        filename (str): Name of the file that contains the full data_utils for each player
+        filename (str): Name of the file that contains the full utils for each player
     """
     headers = ['first_name', 'second_name', 'goals_scored', 'assists', 'total_points', 'minutes', 'goals_conceded',
                'creativity', 'influence', 'threat', 'bonus', 'bps', 'ict_index', 'clean_sheets', 'red_cards',
@@ -34,7 +34,7 @@ def clean_players(filename, base_filename):
 def id_players(players_filename, base_filename):
     """ Creates a file that contains the name to id mappings for each player
     Args:
-        players_filename (str): Name of the file that contains the full data_utils for each player
+        players_filename (str): Name of the file that contains the full utils for each player
     """
     headers = ['first_name', 'second_name', 'id']
     fin = open(players_filename, 'r+', encoding='utf-8')

@@ -7,7 +7,7 @@ from fplrl.tools.transfers import select_transfers
 n_clubs = 20
 n_players_per_club = 21
 
-current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/data_utils/2021-22/gws/merged_gw.csv')
+current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/utils/2021-22/gws/merged_gw.csv')
 
 club = np.random.randint(0, n_clubs, size=(n_clubs * n_players_per_club, 1))
 OH_club = OneHotEncoder(sparse=False).fit_transform(club)

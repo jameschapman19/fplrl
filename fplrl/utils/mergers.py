@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def import_merged_gw(data_dir='C:/Users/chapm/PycharmProjects/fplrl/data/', season='2020-21'):
-    """ Function to call merged_gw.csv file in every data_utils/season folder
+    """ Function to call merged_gw.csv file in every utils/season folder
     Args:
         season (str): Name of the folder season that contains the merged_gw.csv file
     """
@@ -32,7 +32,7 @@ def clean_players_name_string(df, col='name'):
 
 
 def filter_players_exist_latest(df, col='position'):
-    """ Fill in null 'position' (data_utils that only available in 20-21 season) into previous seasons.
+    """ Fill in null 'position' (utils that only available in 20-21 season) into previous seasons.
         Null meaning that player doesnt exist in latest season hence can exclude.
     """
 

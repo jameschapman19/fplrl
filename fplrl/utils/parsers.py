@@ -82,7 +82,7 @@ def parse_entry_history(data, outfile_base):
     chips_df.to_csv(os.path.join(outfile_base, 'chips.csv'))
     season_df = pd.DataFrame.from_records(data["past"])
     season_df.to_csv(os.path.join(outfile_base, 'history.csv'))
-    # profile_data = data_utils["entry"].pop('kit', data_utils["entry"])
+    # profile_data = utils["entry"].pop('kit', utils["entry"])
     # profile_df = pd.DataFrame.from_records(profile_data)
     # profile_df.to_csv(os.path.join(outfile_base, 'profile.csv'))
     gw_history_df = pd.DataFrame.from_records(data["current"])

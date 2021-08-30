@@ -82,14 +82,3 @@ def parse_epl_data(outfile_base):
         player_name = d['player_name']
         player_name = player_name.replace(' ', '_')
         indi_player_frame.to_csv(os.path.join(outfile_base, player_name + '_' + d['id'] + '.csv'), index=False)
-
-
-def main():
-    parse_epl_data('data_utils/2021-22/understat')
-    # md, sd, gd = get_player_data(318)
-    # match_frame = pd.DataFrame.from_records(md)
-    # match_frame.to_csv('auba.csv', index=False)
-
-
-if __name__ == '__main__':
-    main()

@@ -1,6 +1,6 @@
 import pandas as pd
-from fplrl.data_utils.collector import merge_all_gws
-from fplrl.utils import update_data
+
+from fplrl.utils.update import update_data
 
 CURRENT_SEASON = 21
 PREDICTIONS = ['total_points', 'bps']
