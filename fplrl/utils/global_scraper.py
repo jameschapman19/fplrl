@@ -20,6 +20,7 @@ def parse_data():
         xPoint['id'] = e['id']
         xPoint['xP'] = e['ep_this']
         xPoints += [xPoint]
+    gw_num = 0
     events = data["events"]
     for event in events:
         if event["is_current"] == True:
@@ -59,11 +60,3 @@ def parse_data():
 def fixtures(base_filename):
     data = get_fixtures_data()
     parse_fixtures(data, base_filename)
-
-
-def main():
-    parse_data()
-
-
-if __name__ == "__main__":
-    main()
