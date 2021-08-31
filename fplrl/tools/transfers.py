@@ -3,7 +3,7 @@ import numpy as np
 
 
 def select_transfers(current_squad: np.ndarray, club: np.ndarray, position: np.ndarray, expected_points: np.ndarray,
-                     purchase_value: float, sale_value: float, bank: float,
+                     purchase_value: np.ndarray, sale_value: np.ndarray, bank: float,
                      free_transfers_available=2):
     # Define optimisation variables
     selections = cp.Variable(club.shape[0], integer=True)
@@ -16,10 +16,11 @@ def select_transfers(current_squad: np.ndarray, club: np.ndarray, position: np.n
     objective = cp.Maximize(selections @ expected_points + 2 * captain @ expected_points - 4 * hits)
     # Constraints
     constraints = [
-        (current_squad + transfers_in) - (captain + selections + subs) >= 0,
-        (current_squad + transfers_out) - (captain + selections + subs) >= 0,
-        cp.sum((current_squad + transfers_in) - (captain + selections + subs)) <= free_transfers_available + hits,
-        cp.sum((current_squad + transfers_out) - (captain + selections + subs)) <= free_transfers_available + hits,
+        current_squad + transfers_in - transfers_out == selections + subs + captain,
+        (transfers_in + current_squad) <= 1,
+        (current_squad - transfers_out) >= 0,
+        cp.sum(transfers_in) <= free_transfers_available + hits,
+        cp.sum(transfers_out) <= free_transfers_available + hits,
         # Captain, Selections and Subs need to be unique
         (captain + selections + subs) <= 1,
         # no more than 3 from each club
@@ -41,8 +42,7 @@ def select_transfers(current_squad: np.ndarray, club: np.ndarray, position: np.n
         # 15 in the squad
         cp.sum(captain + selections + subs) >= 15,
         # don't exceed budget
-        # (captain + selections + subs) @ cost <= squad_value,
-        current_squad @ purchase_value + transfers_in @ purchase_value - transfers_out @ sale_value <= current_squad @ sale_value + bank,
+        (captain + selections + subs) @ purchase_value <= current_squad @ sale_value + bank,
         # nonneg
         selections >= 0,
         subs >= 0,

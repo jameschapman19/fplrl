@@ -1,11 +1,12 @@
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
-
 from fplrl.tools.squad import select_squad
 from fplrl.tools.transfers import select_transfers
+import pandas as pd
 
 n_clubs = 20
 n_players_per_club = 21
+
 
 current_season = pd.read_csv('C:/Users/chapm/PycharmProjects/fplrl/utils/2021-22/gws/merged_gw.csv')
 
