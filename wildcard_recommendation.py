@@ -6,6 +6,7 @@ import requests
 from fpl import FPL
 from sklearn.preprocessing import OneHotEncoder
 
+from fplrl.tools.squad import select_squad
 from fplrl.tools.transfers import select_transfers
 
 
@@ -43,20 +44,17 @@ def main(team_id):
     purchase_value = elements_df.now_cost.values
     sale_value = elements_df.sell_cost.values
     current_squad = elements_df.selected.values
-    selections, subs, captain, transfers_in, transfers_out, team_expected_points, hits = select_transfers(
-        current_squad, OH_club,
+    selections, subs, captain, team_expected_points = select_squad(
+        OH_club,
         OH_position,
         expected_points,
         purchase_value,
-        sale_value, transfer['bank'],
-        free_transfers_available=transfer['limit']-transfer['made'])
+        sale_value, current_squad=current_squad)
     print('starting XI: \n', elements_df[['first_name', 'second_name']][selections == 1])
     print('Captain: \n', elements_df[['first_name', 'second_name']][captain == 1])
     print('Subs: \n', elements_df[['first_name', 'second_name']][subs == 1])
-    print('Transfers In: \n', elements_df[['first_name', 'second_name']][transfers_in == 1])
-    print('Transfers Out: \n', elements_df[['first_name', 'second_name']][transfers_out == 1])
-    print(f'{hits} hits')
     print(f'{team_expected_points} expected points')
+
 
 
 if __name__ == '__main__':
