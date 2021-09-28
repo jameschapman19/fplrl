@@ -12,7 +12,6 @@ from fplrl.tools.transfers import select_transfers
 async def my_team(user_id):
     async with aiohttp.ClientSession() as session:
         fpl = FPL(session)
-        await fpl.login(email='chapmajw@gmail.com', password='12Collingwood!')
         user = await fpl.get_user(user_id)
         team = await user.get_team()
         bank = await user.get_transfers_status()
